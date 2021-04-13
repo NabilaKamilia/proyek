@@ -17,7 +17,9 @@
                 <h6 class="card-subtitle mb-2 text-muted">{{$dashboard->penulis}}</h6>
                 <h6 class="card-subtitle mb-2 text-muted">{{$dashboard->tema}}</h6>
                 <p class="card-text">{{$dashboard->resep}}</p>
-                
+                <img width="150px" src="{{ asset('/img/'.$dashboard->file)}}">
+                <br><br>
+              
                 <a href="{{$dashboard->id_resep}}/edit" class="btn btn-primary"> Edit </a>
                 <form action="{{$dashboard->id_resep}}" method="POST" class="d-inline"> 
                 @method('delete')

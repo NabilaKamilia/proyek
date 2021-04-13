@@ -13,5 +13,6 @@ class Dashboard extends Model
     protected $primaryKey = 'id_resep';
     protected $increments = false;
 
-    protected $fillable = [ 'nama', 'penulis', 'tema', 'resep'];
+    protected $fillable = [ 'nama', 'penulis', 'tema', 'resep','file'];
+
 }

@@ -11,7 +11,7 @@
         <div class="pull-left mt-2 mb-3">
             <h2>EDIT RESEP</h2>
         </div>
-        <form method="POST" action="/dashboard/{{$dashboard->id_resep}}">
+        <form method="POST" action="/dashboard/{{$dashboard->id_resep}}" enctype="multipart/form-data">
         @method('patch')
         @csrf
         <div class="form-group">
@@ -33,6 +33,11 @@
             <label for="resep">Resep</label>
             <textarea type="text" class="form-control @error ('resep') is-invalid @enderror" id="resep" placeholder="Masukkan Resep" name="resep">{{$dashboard->resep}}</textarea>
             @error('resep') <div class="invalid-feedback">{{$message}}</div> @enderror
+        </div>
+        <div class="form-group">
+            <label for="file">file</label>
+            <input type="file" class="form-control @error ('file') is-invalid @enderror" id="file" placeholder="Masukkan file" name="file" value="{{old('file')}}"></input>
+            @error('file') <div class="invalid-feedback">{{$message}}</div> @enderror
         </div>
         <button type="submit" class="btn btn-primary">Edit Data</button>
         </form>

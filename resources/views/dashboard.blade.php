@@ -41,6 +41,7 @@
     @foreach($dashboards as $dashboard)
         <li class="list-group-item d-flex justify-content-between align-items-center">
             {{ $dashboard->nama}}
+            <img width="150px" src="{{ asset('/img/'.$dashboard->file)}}">
             <a href="/dashboard/{{ $dashboard->id_resep }}" class="badge badge-info">detail</a>
         </li>
     @endforeach

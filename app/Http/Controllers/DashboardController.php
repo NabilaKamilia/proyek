@@ -65,9 +65,26 @@ class DashboardController extends Controller
             'penulis' => 'required',
             'tema' => 'required',
             'resep' => 'required',
+            'file' => 'required|file|image|mimes:jpeg,png,jpg',
+
         ]);
 
-        Dashboard::create($request->all());
+        // menyimpan data file yang diupload ke variabel $file
+		$file = $request->file('file');
+ 
+		$nama_file = $file->getClientOriginalName();
+ 
+      	        // isi dengan nama folder tempat kemana file diupload
+		$tujuan_upload = 'img';
+		$file->move($tujuan_upload,$nama_file);
+
+        Dashboard::create([
+            'nama' => $request -> nama,
+            'penulis' => $request ->penulis,
+            'tema' => $request ->tema,
+            'resep' => $request ->resep,
+            'file' => $nama_file,
+        ]);
         return redirect('/dashboard')->with('status', 'Resep Ditambahkan!');
         
     }
@@ -114,7 +131,17 @@ class DashboardController extends Controller
             'penulis' => 'required',
             'tema' => 'required',
             'resep' => 'required',
+            'file' => 'required|file|image|mimes:jpeg,png,jpg',
         ]);
+
+        // menyimpan data file yang diupload ke variabel $file
+		$file = $request->file('file');
+ 
+		$nama_file = $file->getClientOriginalName();
+ 
+      	        // isi dengan nama folder tempat kemana file diupload
+		$tujuan_upload = 'img';
+		$file->move($tujuan_upload,$nama_file);
 
         Dashboard::where('id_resep', $dashboard->id_resep)
                     ->update([
@@ -122,6 +149,7 @@ class DashboardController extends Controller
                         'penulis' => $request->penulis,
                         'tema' => $request->tema,
                         'resep' => $request->resep,
+                        'file' => $nama_file,
                     ]);
         
         return redirect('/dashboard')->with('status', 'Resep Diedit!');
@@ -139,4 +167,6 @@ class DashboardController extends Controller
         Dashboard::destroy($dashboard->id_resep);
         return redirect('/dashboard')->with('status', 'Resep Telah Dipahus!');
     }
+
+    
 }
